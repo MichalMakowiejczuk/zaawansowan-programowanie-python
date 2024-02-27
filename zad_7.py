@@ -17,7 +17,7 @@ class Brewery:
         return f"Brewery ID: {self.id}\nName: {self.name}\nType: {self.brewery_type}\nAddress: {self.street}, {self.city}, {self.state} {self.postal_code}, {self.country}\nPhone: {self.phone}\nWebsite: {self.website_url}\n"
 
 def get_breweries():
-    # Pobierz dane z API
+    # get API data
     api_url = "https://api.openbrewerydb.org/breweries"
     response = requests.get(api_url, params={"per_page": 20})
     
@@ -30,11 +30,9 @@ def get_breweries():
         return None
 
 if __name__ == "__main__":
-    # Pobierz listę browarów
     breweries = get_breweries()
 
     if breweries:
-        # Iteruj i wyświetl każdy obiekt
         for brewery in breweries:
             print(brewery)
     else:
