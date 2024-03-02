@@ -1,3 +1,17 @@
+from zad_1 import Student
+
+class Library:
+    def __init__(self, city, street, zip_code, open_hours, phone):
+        self.city = city
+        self.street = street
+        self.zip_code = zip_code
+        self.open_hours = open_hours
+        self.phone = phone
+
+    def __str__(self):
+        return f'Library: {self.city}, {self.street}, {self.zip_code}, Open Hours: {self.open_hours}, Phone: {self.phone}'
+
+
 class Employee:
     def __init__(self, first_name, last_name, hire_date, birth_date, city, street, zip_code, phone):
         self.first_name = first_name
@@ -10,16 +24,19 @@ class Employee:
         self.phone = phone
 
     def __str__(self):
-        return (
-            f"Employee Information:\n"
-            f"Name: {self.first_name} {self.last_name}\n"
-            f"Hire Date: {self.hire_date}\n"
-            f"Birth Date: {self.birth_date}\n"
-            f"City: {self.city}\n"
-            f"Street: {self.street}\n"
-            f"Zip code: {self.zip_code}\n"
-            f"Phone: {self.phone}"
-        )
+        return f'Employee: {self.first_name} {self.last_name}, Hire Date: {self.hire_date}, Birth Date: {self.birth_date}, {self.city}, {self.street}, {self.zip_code}, Phone: {self.phone}'
+
+
+class Book:
+    def __init__(self, library, publication_date, author_name, author_surname, number_of_pages):
+        self.library = library
+        self.publication_date = publication_date
+        self.author_name = author_name
+        self.author_surname = author_surname
+        self.number_of_pages = number_of_pages
+
+    def __str__(self):
+        return f'Book: {self.author_name} {self.author_surname}, Published: {self.publication_date}, Pages: {self.number_of_pages}, {self.library}'
 
 
 class Order:
@@ -30,79 +47,31 @@ class Order:
         self.order_date = order_date
 
     def __str__(self):
-        book_list = "\n".join([f"   - {book.title} by {book.author_name} {book.author_surname}" for book in self.books])
-        return f"Order Details:\nEmployee: {self.employee}\nStudent: {self.student}\nBooks:\n{book_list}\nOrder Date: {self.order_date}"
+        return f'Order by {self.employee} for {self.student} on {self.order_date}\nBooks:\n{", ".join(map(str, self.books))}'
 
 
+# Creating instances
+library1 = Library("City1", "Street1", "12345", "9 AM - 6 PM", "123-456-7890")
+library2 = Library("City2", "Street2", "67890", "10 AM - 7 PM", "987-654-3210")
 
-class Book:
-    def __init__(self, title, publication_date, author_name, author_surname, number_of_pages):
-        self.title = title
-        self.publication_date = publication_date
-        self.author_name = author_name
-        self.author_surname = author_surname
-        self.number_of_pages = number_of_pages
+employee1 = Employee("John", "Doe", "2022-01-01", "1990-05-15", "City1", "Street1", "12345", "555-111-2222")
+employee2 = Employee("Jane", "Smith", "2022-02-01", "1985-08-20", "City2", "Street2", "67890", "555-333-4444")
+employee3 = Employee("Bob", "Johnson", "2022-03-01", "1995-03-10", "City1", "Street1", "12345", "555-555-6666")
 
-    def __str__(self):
-        return f"Title: {self.title}\nPublication Date: {self.publication_date}\nAuthor: {self.author_name} {self.author_surname}\nNumber of Pages: {self.number_of_pages}"
+book1 = Book(library1, "2021-01-01", "Author1", "Surname1", 200)
+book2 = Book(library1, "2020-02-15", "Author2", "Surname2", 300)
+book3 = Book(library2, "2019-03-20", "Author3", "Surname3", 250)
+book4 = Book(library2, "2018-04-25", "Author4", "Surname4", 180)
+book5 = Book(library2, "2017-05-30", "Author5", "Surname5", 220)
 
+student1 = Student("Jan Kowalski", [60, 70, 80])
+student2 = Student("Anna Nowak", [40, 45, 30])
+student3 = Student("Michał M", [40, 45, 30])
 
-class Library:
-    def __init__(self, city, street, zip_code, open_hours, phone):
-        self.city = city
-        self.street = street
-        self.zip_code = zip_code
-        self.open_hours = open_hours
-        self.phone = phone
-        self.books = []  # Lista książek w bibliotece
+order1 = Order(employee1, student1, [book1, book2, book3], "2022-04-01")
+order2 = Order(employee2, student2, [book4, book5], "2022-05-01")
 
-    def __str__(self):
-        library_info = (
-            f"Library Information:\n"
-            f"City: {self.city}\n"
-            f"Street: {self.street}\n"
-            f"ZIP Code: {self.zip_code}\n"
-            f"Open Hours: {self.open_hours}\n"
-            f"Phone: {self.phone}\n"
-        )
-
-        books_info = "\nBooks in the Library:\n"
-        if not self.books:
-            books_info += "No books available."
-        else:
-            books_info += "\n".join(str(book) for book in self.books)
-
-        return library_info + books_info
-
-    def add_book(self, book):
-        self.books.append(book)
-
-# Przykład użycia:
-library_example = Library(
-    city="Example City",
-    street="Main Street",
-    zip_code="12345",
-    open_hours="9:00 AM - 5:00 PM",
-    phone="123-456-7890"
-)
-
-# books
-book1 = Book(title="Introduction to Python", publication_date=2000, author_name="John", author_surname="Doe", number_of_pages=100)
-book2 = Book(title="Intermidiet Python", publication_date=2001, author_name="John", author_surname="Doe", number_of_pages=200)
-book3 = Book(title="Semi Intermidiet Python", publication_date=2004, author_name="John", author_surname="Doe", number_of_pages=500)
-book4 = Book(title="Advance Python", publication_date=2006, author_name="John", author_surname="Doe", number_of_pages=300)
-book5 = Book(title="Semi Advance Python", publication_date=2007, author_name="John", author_surname="Doe", number_of_pages=700)
-
-# libraries
-library1 = Library(city="Katowice", street="uliczna", zip_code="23343", open_hours="9-17", phone="213-231-432")
-library2 = Library(city="Gliwice", street="fajna", zip_code="56789", open_hours="10-18", phone="218-643-890")
-
-# employee
-employee1 = Employee(first_name="Ja", last_name="nazwisko", hire_date="2020", birth_date="1970", city="Katowice", street="pogodna", zip_code="43213", phone="543-234-234")
-employee2 = Employee(first_name="Ja", last_name="nazwisko", hire_date="2020", birth_date="1970", city="Katowice", street="pogodna", zip_code="43213", phone="543-234-234")
-employee23 = Employee(first_name="Ja", last_name="nazwisko", hire_date="2020", birth_date="1970", city="Katowice", street="pogodna", zip_code="43213", phone="543-234-234")
-library_example.add_book(book1)
-library_example.add_book(book2)
-
-print(library_example)
-
+# Displaying orders
+print(order1)
+print("\n")
+print(order2)

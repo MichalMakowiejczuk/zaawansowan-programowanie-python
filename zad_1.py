@@ -7,17 +7,20 @@ class Student:
         average_marks = sum(self.marks) / len(self.marks)
         return average_marks > 50
 
+    def __str__(self):
+        return f"Student: {self.name}, "
 
 
 
-# Przykładowe obiekty klasy Student
-student1 = Student("Jan Kowalski", [60, 70, 80])
-student2 = Student("Anna Nowak", [40, 45, 30])
+if __name__ == "__main__":
+    # Przykładowe obiekty klasy Student
+    student1 = Student("Jan Kowalski", [60, 70, 80])
+    student2 = Student("Anna Nowak", [40, 45, 30])
 
-# Testowanie metody is_passed
-result1 = student1.is_passed()
-result2 = student2.is_passed()
+    # Testowanie metody is_passed
+    result1 = student1.is_passed()
+    result2 = student2.is_passed()
 
-# Wyświetlenie wyników
-print(f"{student1.name}: {'Zaliczony' if result1 else 'Nie zaliczony'}")
-print(f"{student2.name}: {'Zaliczony' if result2 else 'Nie zaliczony'}")
+    # Wyświetlenie wyników
+    print(f"{student1.name}: {'Zaliczony' if result1 else 'Nie zaliczony'}")
+    print(f"{student2.name}: {'Zaliczony' if result2 else 'Nie zaliczony'}")
