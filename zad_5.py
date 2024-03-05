@@ -48,3 +48,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# python zad_5.py --city=Berlin

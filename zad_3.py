@@ -32,18 +32,3 @@ flat = Flat(area=80, rooms=2, price=150000, address="ul. Słoneczna 10", floor=2
 
 print(house)
 print(flat)
-"""
-print("House:")
-print("Area:", house.area)
-print("Rooms:", house.rooms)
-print("Price:", house.price)
-print("Address:", house.address)
-print("Plot:", house.plot)
-
-print("\nFlat:")
-print("Area:", flat.area)
-print("Rooms:", flat.rooms)
-print("Price:", flat.price)
-print("Address:", flat.address)
-print("Floor:", flat.floor)
-"""

@@ -72,6 +72,7 @@ order1 = Order(employee1, student1, [book1, book2, book3], "2022-04-01")
 order2 = Order(employee2, student2, [book4, book5], "2022-05-01")
 
 # Displaying orders
+print("\n")
 print(order1)
 print("\n")
 print(order2)
