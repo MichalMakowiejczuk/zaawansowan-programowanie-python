@@ -1,4 +1,4 @@
-imiona = ["Michał", "Paulina", "Adam", "Ania", "Piotrek"]
+imiona = ["Michał", "Paulina", "Adam", "Ania", "Piotrek", "Julia"]
 
 
 def my_func(imiona):
