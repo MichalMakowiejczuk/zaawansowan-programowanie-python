@@ -11,7 +11,6 @@ class Student:
         return f"Student: {self.name}, "
 
 
-
 if __name__ == "__main__":
     # Przykładowe obiekty klasy Student
     student1 = Student("Jan Kowalski", [60, 70, 80])

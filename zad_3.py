@@ -4,7 +4,7 @@ class Property:
         self.rooms = rooms
         self.price = price
         self.address = address
-    
+
     def __str__(self):
         return f"Area: {self.area}, Rooms: {self.rooms}, Price: {self.price}, Address: {self.address}"
 
@@ -13,7 +13,7 @@ class House(Property):
     def __init__(self, area, rooms, price, address, plot: int):
         super().__init__(area, rooms, price, address)
         self.plot = plot
-    
+
     def __str__(self):
         return f"House - {super().__str__()}, Plot: {self.plot}"
 

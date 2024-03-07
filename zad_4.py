@@ -15,7 +15,9 @@ class Brewery:
         self.website_url = data.get('website_url')
 
     def __str__(self):
-        return f"Brewery ID: {self.id}\nName: {self.name}\nType: {self.brewery_type}\nAddress: {self.street}, {self.city}, {self.state} {self.postal_code}, {self.country}\nPhone: {self.phone}\nWebsite: {self.website_url}\n"
+        return f"Brewery ID: {self.id}\nName: {self.name}\nType: {self.brewery_type}\n" \
+               f"Address: street-{self.street}, city-{self.city}, state-{self.state}, postal code-{self.postal_code}, country-{self.country}\n" \
+               f"Phone: {self.phone}\nWebsite: {self.website_url}\n"
 
 
 def get_breweries():
