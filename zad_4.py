@@ -1,5 +1,6 @@
 import requests
 
+
 class Brewery:
     def __init__(self, data):
         self.id = data.get('id')
@@ -15,6 +16,7 @@ class Brewery:
 
     def __str__(self):
         return f"Brewery ID: {self.id}\nName: {self.name}\nType: {self.brewery_type}\nAddress: {self.street}, {self.city}, {self.state} {self.postal_code}, {self.country}\nPhone: {self.phone}\nWebsite: {self.website_url}\n"
+
 
 def get_breweries():
     # get API data
