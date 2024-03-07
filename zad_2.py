@@ -2,12 +2,12 @@ def multiply_by_2_loop(list_of_ints):
     result = []
     for i in list_of_ints:
         result.append(i*2)
-    return(result)
+    return result
 
 
 def multiply_by_2_comprehension(list_of_ints):
     result = [i*2 for i in list_of_ints]
-    return(result)
+    return result
 
 
 test_ints = list(range(1, 6))

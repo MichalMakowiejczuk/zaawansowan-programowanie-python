@@ -1,5 +1,5 @@
 def get_even_numbers(list_of_ints):
-    result = [i for i in list_of_ints if i%2==0]
+    result = [i for i in list_of_ints if i % 2 == 0]
     return result
 
 
