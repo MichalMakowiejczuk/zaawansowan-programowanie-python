@@ -1,6 +1,7 @@
 import requests
 import argparse
 
+
 class Brewery:
     def __init__(self, data):
         self.id = data.get('id')
@@ -19,6 +20,7 @@ class Brewery:
                f"Address: street-{self.street}, city-{self.city}, state-{self.state}, postal code-{self.postal_code}, country-{self.country}\n" \
                f"Phone: {self.phone}\nWebsite: {self.website_url}\n"
 
+
 def get_breweries(city=None):
     api_url = 'https://api.openbrewerydb.org/breweries'
     params = {'by_city': city, "per_page": 20}
@@ -31,6 +33,7 @@ def get_breweries(city=None):
     else:
         print(f"Error connecting to API. Status code: {response.status_code}")
         return None
+
 
 def main():
     parser = argparse.ArgumentParser(description="Fetch and display brewery information.")
@@ -46,7 +49,9 @@ def main():
             print(f"--- Brewery {index} ---")
             print(brewery)
 
+
 if __name__ == "__main__":
     main()
+
 
 # python zad_5.py --city=Berlin
