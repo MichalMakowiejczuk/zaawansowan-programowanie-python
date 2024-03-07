@@ -22,7 +22,6 @@ def get_breweries():
     # get API data
     api_url = "https://api.openbrewerydb.org/breweries"
     response = requests.get(api_url, params={"per_page": 20})
-    
     if response.status_code == 200:
         breweries_data = response.json()
         breweries_list = [Brewery(data) for data in breweries_data]
