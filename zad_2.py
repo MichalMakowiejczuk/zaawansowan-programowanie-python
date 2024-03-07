@@ -1,5 +1,6 @@
 from zad_1 import Student
 
+
 class Library:
     def __init__(self, city, street, zip_code, open_hours, phone):
         self.city = city
