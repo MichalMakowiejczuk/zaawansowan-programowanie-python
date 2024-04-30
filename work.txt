@@ -1,0 +1,17 @@
+Praca 5916,status:done
+Praca 7327,status:done
+Praca 3577,status:in_progress
+Praca 9576,status:pending
+Praca 1387,status:pending
+Praca 7280,status:pending
+Praca 6661,status:pending
+Praca 4187,status:pending
+Praca 3015,status:pending
+Praca 3272,status:pending
+Praca 2151,status:pending
+Praca 2207,status:pending
+Praca 9541,status:pending
+Praca 6125,status:pending
+Praca 6765,status:pending
+Praca 1831,status:pending
+Praca 5823,status:pending
