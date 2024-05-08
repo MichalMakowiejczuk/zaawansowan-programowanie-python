@@ -36,7 +36,7 @@ def main():
                 print(f"Zakończono pracę {work_id}")
         
         # Pauza przed ponownym sprawdzeniem pracy
-        time.sleep(5)  # Pauza 5 sekund przed sprawdzeniem pracy ponownie
+        time.sleep(5)
 
 if __name__ == "__main__":
     main()
