@@ -1,25 +1,35 @@
-# producer.py
+import pika
 import time
 import random
-
-def write_to_file(filename, data):
-    with open(filename, 'a') as file:
-        file.write(data + '\n')
+from config import RABBITMQ_HOST, RABBITMQ_PORT, RABBITMQ_USER, RABBITMQ_PASS
 
 def main():
+    # Połączenie z serwerem RabbitMQ
+    credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASS)
+    connection = pika.BlockingConnection(pika.ConnectionParameters(RABBITMQ_HOST, RABBITMQ_PORT, '/', credentials))
+    channel = connection.channel()
+
+    # Deklaracja kolejki
+    channel.queue_declare(queue='prace')
+
     while True:
         # Generowanie przykładowej pracy (rozmowy telefonicznej)
         work_id = random.randint(1000, 9999)
-        work_data = f"Praca {work_id},status:pending"
+        work_data = f"Praca {work_id}, status: pending"
         
-        # Zapis pracy do pliku
-        write_to_file('work.txt', work_data)
-        print(f"Zapisano pracę {work_id}")
+        # Wysłanie pracy do kolejki
+        channel.basic_publish(exchange='', routing_key='prace', body=work_data)
+        print(f"Wysłano pracę {work_id} do kolejki")
         
         # Pauza przed dodaniem kolejnej pracy
         time.sleep(10)  # Pauza 10 sekund przed dodaniem kolejnej pracy
 
+    # Zamknięcie połączenia
+    connection.close()
+
 if __name__ == "__main__":
     main()
+
+
 
 

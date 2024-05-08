@@ -1,42 +1,43 @@
-# consumer.py
+import pika
 import time
+from config import RABBITMQ_HOST, RABBITMQ_PORT, RABBITMQ_USER, RABBITMQ_PASS
 
-def read_from_file(filename):
-    with open(filename, 'r') as file:
-        lines = file.readlines()
-    return lines
+def update_status(work_id, new_status):
+    # Tutaj możesz dodać logikę aktualizacji statusu pracy
+    print(f"Aktualizacja statusu pracy {work_id} na: {new_status}")
 
-def update_status(filename, work_id, new_status):
-    lines = read_from_file(filename)
-    with open(filename, 'w') as file:
-        for line in lines:
-            if line.startswith(f"Praca {work_id}"):
-                file.write(f"Praca {work_id},status:{new_status}\n")
-            else:
-                file.write(line)
+def callback(ch, method, properties, body):
+    # Przetwarzanie otrzymanej pracy
+    work_data = body.decode('utf-8')
+    work_id = work_data.split(',')[0].split()[1]
+    print(f"Otrzymano pracę do wykonania: {work_id}")
+    
+    # Symulacja wykonania pracy
+    print(f"Rozpoczęcie pracy {work_id}")
+    time.sleep(21)  # Symulacja wykonania pracy przez 30 sekund
+    
+    # Aktualizacja statusu po wykonaniu pracy
+    update_status(work_id, 'done')
+    print(f"Zakończono pracę {work_id}")
 
 def main():
-    while True:
-        # Odczytanie pracy z pliku
-        lines = read_from_file('work.txt')
-        for line in lines:
-            if "status:pending" in line:
-                work_id = line.split(',')[0].split()[1]
-                print(f"Znaleziono pracę do wykonania: {work_id}")
-                
-                # Aktualizacja statusu na 'in_progress'
-                update_status('work.txt', work_id, 'in_progress')
-                
-                # Symulacja wykonania pracy
-                print(f"Rozpoczęcie pracy {work_id}")
-                time.sleep(30)  # Symulacja wykonania pracy przez 30 sekund
-                
-                # Aktualizacja statusu na 'done' po wykonaniu pracy
-                update_status('work.txt', work_id, 'done')
-                print(f"Zakończono pracę {work_id}")
-        
-        # Pauza przed ponownym sprawdzeniem pracy
-        time.sleep(5)
+    # Połączenie z serwerem RabbitMQ
+    credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASS)
+    connection = pika.BlockingConnection(pika.ConnectionParameters(RABBITMQ_HOST, RABBITMQ_PORT, '/', credentials))
+    channel = connection.channel()
+
+    # Deklaracja kolejki
+    channel.queue_declare(queue='prace')
+
+    # Zarejestrowanie funkcji do obsługi otrzymanych wiadomości
+    channel.basic_consume(queue='prace', on_message_callback=callback, auto_ack=True)
+
+    print('Czekam na wiadomości...')
+    # Rozpoczęcie nasłuchiwania wiadomości
+    channel.start_consuming()
+
+    # Zamknięcie połączenia
+    connection.close()
 
 if __name__ == "__main__":
     main()
