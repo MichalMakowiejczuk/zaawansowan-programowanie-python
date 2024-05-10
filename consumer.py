@@ -14,7 +14,7 @@ def callback(ch, method, properties, body):
     
     # Symulacja wykonania pracy
     print(f"Rozpoczęcie pracy {work_id}")
-    time.sleep(21)  # Symulacja wykonania pracy przez 30 sekund
+    time.sleep(30)  # Symulacja wykonania pracy przez 30 sekund
     
     # Aktualizacja statusu po wykonaniu pracy
     update_status(work_id, 'done')
