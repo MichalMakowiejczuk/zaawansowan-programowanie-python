@@ -8,7 +8,7 @@ def detect_people(image_path):
     # Utworzenie detektora ludzi
     hog = cv2.HOGDescriptor()
     hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
-
+    
     # Wykrywanie ludzi na obrazie
     (rects, weights) = hog.detectMultiScale(gray, scale=1.09, winStride=(4, 8))
 
